@@ -1,0 +1,22 @@
+from flask import Flask, jsonify
+import sqlite3
+
+app = Flask(__name__)
+
+@app.route("/api/produtos")
+def listar_produtos():
+    conexao = sqlite3.connect("ueno.db")  # ou o nome correto do seu banco
+    cursor = conexao.cursor()
+    cursor.execute("SELECT id, nome, descricao, preco FROM produtos")
+    produtos = cursor.fetchall()
+    conexao.close()
+
+    produtos_formatados = [
+        {"id": p[0], "nome": p[1], "descricao": p[2], "preco": p[3]}
+        for p in produtos
+    ]
+
+    return jsonify(produtos_formatados)
+
+if __name__ == "__main__":
+    app.run(debug=True)
