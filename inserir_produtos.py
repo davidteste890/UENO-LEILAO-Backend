@@ -1,18 +1,22 @@
 import sqlite3
 
-conexao = sqlite3.connect('leilao.db')
-cursor = conexao.cursor()
+conn = sqlite3.connect('produtos.db')
+cursor = conn.cursor()
 
-produtos = [
-    ("Notebook Gamer", "Notebook com placa de vídeo dedicada", 3500.00),
-    ("iPhone 13", "Smartphone da Apple, 128GB", 4500.00),
-    ("Smart TV 50\"", "Televisão 4K com HDR", 2800.00)
-]
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS produtos (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT NOT NULL,
+        descricao TEXT,
+        preco_inicial REAL NOT NULL
+    )
+''')
 
-for nome, descricao, preco in produtos:
-    cursor.execute("INSERT INTO produtos (nome, descricao, preco) VALUES (?, ?, ?)", (nome, descricao, preco))
+cursor.execute('''
+    INSERT INTO produtos (nome, descricao, preco_inicial)
+    VALUES ('Notebook Gamer', 'Notebook com RTX 3060 e 16GB RAM', 4500.00)
+''')
 
-conexao.commit()
-conexao.close()
+conn.commit()
+conn.close()
 
-print("Produtos inseridos com sucesso!")
