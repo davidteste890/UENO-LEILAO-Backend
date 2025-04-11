@@ -1,3 +1,5 @@
 flask
-flask_sqlalchemy
-flask_cors
+flask-cors
+flask-sqlalchemy
+flask-jwt-extended
+gunicorn
