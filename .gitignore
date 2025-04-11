@@ -1,0 +1,19 @@
+# Banco de dados local
+leilao.db
+
+# Arquivos de cache do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ambientes virtuais
+venv/
+env/
+
+# Arquivos do sistema
+.DS_Store
+*.swp
+
+# Config do VSCode (se usar)
+.vscode/
